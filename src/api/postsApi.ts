@@ -1,15 +1,27 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery , useInfiniteQuery} from '@tanstack/react-query';
 
-const fetchPosts = async () => {
-  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0');
+const fetchPosts = async ( {offset}: {offset: string}) => {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=40&offset=${offset}`);
   if (!res.ok) throw new Error('Error al obtener los posts');
-  return res.json();
+  const data =  res.json();
+  return data;
 };
 
 export const usePosts = () => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['posts'],
-    queryFn: fetchPosts,
+    queryFn: async (data) => {
+      const {pageParam} = data
+
+      const response = await fetchPosts({offset: pageParam});
+      return response
+    },
+    initialPageParam: "0",
+    getNextPageParam: (lastPage, allPages) => 
+         lastPage.next ? new URL(lastPage.next).searchParams.get('offset') : null,
     //staleTime: 1000 * 60 * 5, // 5 minutos en caché
   });
+
+  
+
 };

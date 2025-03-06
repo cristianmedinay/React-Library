@@ -6,19 +6,19 @@ type PostState = {
 };
 
 
-const createPostSlice = (set: SetState<PostState>): PostState => ({
+/* const createPostSlice = (set: SetState<PostState>): PostState => ({
 
   selectedPostId: null,
     setSelectedPostId: (id) => set({ selectedPostId: id }),
 });
-
-
 export const usePostStore = create<PostState>((set) => ({
-
   ...createPostSlice(set),
   
+})); */
+export const usePostStore = create<PostState>((set) => ({
+  selectedPostId: null,
+  setSelectedPostId: (id) => set({ selectedPostId: id }),
 }));
-
 /* 
 type Post = {
   id: number;
