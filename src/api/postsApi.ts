@@ -11,6 +11,7 @@ export const usePosts = () => {
   return useInfiniteQuery({
     queryKey: ['posts'],
     queryFn: async (data) => {
+      console.log(data)
       const {pageParam} = data
 
       const response = await fetchPosts({offset: pageParam});
@@ -18,6 +19,9 @@ export const usePosts = () => {
     },
     initialPageParam: "0",
     getNextPageParam: (lastPage, allPages) => 
+
+      //new URL(lastPage.next).searchParams.get('offset')
+      
          lastPage.next ? new URL(lastPage.next).searchParams.get('offset') : null,
     //staleTime: 1000 * 60 * 5, // 5 minutos en caché
   });

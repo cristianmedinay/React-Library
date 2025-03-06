@@ -42,12 +42,12 @@ const PostsList = () => {
 
   const usersx = users?.pages?.flatMap((page: any) => page.users) ?? []
 
- 
+  
   //const pokes= data?.pages.reduce((prevMovies, pages )=> [...prevMovies, ...pages.results], []) ?? [];
 
   const pokes = data?.pages.flatMap((page: any) => page.results) ?? [];
 
-  console.log(pokes?.length)
+  
   const value = useSelector((state) => state.posts.value); // ✅ Llamada incondicional al Hook
 
   if (usersError || usersLoading) return <p>Cargando...</p>; 
@@ -89,7 +89,7 @@ const PostsList = () => {
         }
     </ul>
     {!usersLoading && !usersError && hasNextUserPage && <button onClick={() => fetchNextUserPage()}>Cargar más</button>}
-    {/* {<InfiniteScroll
+    {<InfiniteScroll
       dataLength={pokes?.length}
       next={()=> fetchNextPostsPage()}
       hasMore={hasNextPostsPage}
@@ -109,7 +109,7 @@ const PostsList = () => {
           }
         </div>
       </div>
-    </InfiniteScroll>} */}
+    </InfiniteScroll>}
     </div>
   );
 };
