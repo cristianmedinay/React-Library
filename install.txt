@@ -1,0 +1,20 @@
+npm install --save-dev ts-node
+npm install --save-dev @testing-library/react @testing-library/jest-dom ts-jest jest
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom @types/jest ts-jest jest-environment-jsdom
+
+
+npm install zustand
+npm install @tanstack/react-query
+npm install @reduxjs/toolkit react-redux
+
+
+
+
+. Ventajas de Redux Toolkit
+Menos boilerplate: No necesitas definir acciones manualmente ni usar switch en los reducers.
+
+Inmutabilidad segura: Usa Immer bajo el capó, lo que te permite escribir código que "muta" el estado de manera segura.
+
+Configuración simplificada: configureStore configura automáticamente middleware como Redux Thunk y habilita Redux DevTools.
+
+Slices organizados: Puedes dividir tu lógica en slices independientes y combinarlos en el stor
