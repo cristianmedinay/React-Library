@@ -1,8 +1,15 @@
 import { create, SetState } from 'zustand';
-
+type Elemento = {
+  id: number;
+  nombre: string;
+};
 type PostState = {
   selectedPostId: number | null;
   setSelectedPostId: (id: number | null) => void;
+
+  elementos: Elemento[];
+  elementoSeleccionado: Elemento | null;
+  seleccionarElemento: (id: number) => void;
 };
 
 
@@ -17,8 +24,21 @@ export const usePostStore = create<PostState>((set) => ({
 })); */
 export const usePostStore = create<PostState>((set) => ({
   selectedPostId: null,
-  setSelectedPostId: (id) => set({ selectedPostId: id }),
+  setSelectedPostId: (id: number | null) => set({ selectedPostId: id }),
+  elementos: [
+    { id: 1, nombre: 'Elemento 1' },
+    { id: 2, nombre: 'Elemento 2' },
+    { id: 3, nombre: 'Elemento 3' },
+  ],
+  elementoSeleccionado: null,
+  seleccionarElemento: (id: number) => {
+    set((state) => ({
+      elementoSeleccionado: state.elementos.find((el: { id: number; }) => el.id === id) || null,
+    }));
+  }
 }));
+
+
 /* 
 type Post = {
   id: number;

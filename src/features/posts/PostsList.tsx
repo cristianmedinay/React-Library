@@ -7,15 +7,16 @@ import { useEffect } from 'react';
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { usePostsPersonas } from '../../api/postsPersonas';
+import { useNavigate } from 'react-router-dom';
 const PostsList = () => {
   
-
+  const navigate = useNavigate();
   //const { selectedPostId } = usePostStore(); // Se re-renderiza cuando selectedPostId cambia
 
   //ZUSTAND
   const setSelectedPostId = usePostStore((state) => state.setSelectedPostId);// No causa re-render
   const selectedPostId = usePostStore((state) => state.selectedPostId);
-
+  const {  elementos, seleccionarElemento } = usePostStore();
 
 
   useEffect(() => {
@@ -63,7 +64,10 @@ const PostsList = () => {
     dispatch(increment()); // ✅ Correcto: Despachar la acción increment
     
   };
-
+  const verDetalle = (id: number) => {
+    seleccionarElemento(id); // Selecciona el elemento en el store
+    navigate('/detalle'); // Navega a la vista de detalle
+  };
  
   return (
     <div>
@@ -78,16 +82,27 @@ const PostsList = () => {
           
             }
         </ul> */}
-    <ul>
+    {/* <ul>
       {
       usersx.map((post: any, index : number) => (
-          <li key={index} >
+          <li key={post.name.first} >
             {post.name.first}
+            <button onClick={() => verDetalle(index)}>Ver Detalle</button>
           </li>
       ))
       
         }
-    </ul>
+    </ul> */}
+
+<ul>
+        {elementos.map((elemento) => (
+          <li key={elemento.id}>
+            {elemento.nombre}
+            <button onClick={() => verDetalle(elemento.id)}>Ver Detalle</button>
+          </li>
+        ))}
+      </ul>
+
     {!usersLoading && !usersError && hasNextUserPage && <button onClick={() => fetchNextUserPage()}>Cargar más</button>}
     {<InfiniteScroll
       dataLength={pokes?.length}

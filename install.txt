@@ -7,7 +7,7 @@ npm install zustand
 npm install @tanstack/react-query
 npm install @reduxjs/toolkit react-redux
 
-
+npm i react-router-dom
 
 
 . Ventajas de Redux Toolkit
