@@ -1,7 +1,7 @@
 npm install --save-dev ts-node
 npm install --save-dev @testing-library/react @testing-library/jest-dom ts-jest jest
 npm install --save-dev jest @testing-library/react @testing-library/jest-dom @types/jest ts-jest jest-environment-jsdom
-
+npm i @testing-library/user-event
 
 npm install zustand
 npm install @tanstack/react-query
